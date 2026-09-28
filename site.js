@@ -30,3 +30,11 @@ async function loadCatalog(){try{const query=new URLSearchParams({website_id:'eq
  }catch{/* Artist page content remains available if the shared catalog is offline. */}}
 
 load();
+
+// Public radio player; playback begins only when the visitor presses play.
+{
+ const bar=document.createElement('section');bar.setAttribute('aria-label','Highlife Radio live player');bar.style.cssText='display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:12px;margin:18px 0;padding:16px 20px;background:#141414;color:white;border:1px solid #b6a35d;border-radius:14px';
+ const copy=document.createElement('div'),title=document.createElement('strong'),prompt=document.createElement('p');title.textContent='Highlife Radio';prompt.textContent='Press play to listen to Highlife Radio';prompt.style.cssText='margin:5px 0 0;color:#eee;font-size:14px';copy.append(title,prompt);
+ const audio=document.createElement('audio');audio.controls=true;audio.preload='none';audio.src='https://richrow-radio.129-213-164-255.sslip.io/listen/rich_row_radio/radio.mp3';audio.setAttribute('aria-label','Play Highlife Radio');audio.style.cssText='width:320px;max-width:100%;height:42px;margin:0';audio.addEventListener('error',()=>{prompt.textContent='The stream is reconnecting. Try the full radio player.'});
+ const more=document.createElement('a');more.href='https://richrowmusic.com/radio.html';more.textContent='Full player ↗';more.style.color='#e9d883';more.target='_blank';more.rel='noopener';bar.append(copy,audio,more);document.querySelector('main').prepend(bar);
+}
