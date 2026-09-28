@@ -31,4 +31,4 @@ async function loadCatalog(){try{const query=new URLSearchParams({website_id:'eq
 
 load();
 
-import('./radio-player.js?v=cover3').then(({mountSpeakerRadio})=>{const root=document.createElement('section');document.querySelector('main').prepend(root);mountSpeakerRadio(root);}).catch(()=>{});
+import('./radio-player.js?v=cover3').then(({mountSpeakerRadio})=>{const root=document.createElement('section');document.querySelector('.hero').after(root);mountSpeakerRadio(root);}).catch(()=>{});
