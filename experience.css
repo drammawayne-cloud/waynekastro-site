@@ -48,7 +48,7 @@ body.artist-home .catalog-card .action{align-self:flex-start;margin-top:auto;bac
 .album-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:25px}
 .album-item{margin:0;min-width:0}
 .album-open{position:relative;width:100%;padding:0;border:0;display:block;cursor:zoom-in;background:var(--soft);overflow:hidden;border-radius:14px}
-.album-open img{display:block;width:100%;aspect-ratio:4/5;object-fit:cover;transition:transform .3s ease}
+.album-open img{display:block;width:100%;height:auto;aspect-ratio:4/5;object-fit:cover;transition:transform .3s ease}
 .album-open:hover img{transform:scale(1.035)}
 .album-open::after{content:"↗";position:absolute;right:14px;bottom:14px;display:grid;place-items:center;width:36px;height:36px;border-radius:50%;background:#171511c9;color:#fff;font:22px Arial,sans-serif}
 .album-item figcaption{padding:15px 2px 0;font:19px/1.3 Georgia,serif;color:var(--ink)}
