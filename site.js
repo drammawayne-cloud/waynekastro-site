@@ -1,5 +1,5 @@
 'use strict';
-const site=document.body.dataset.site,base='https://console.richrowmusic.com',content=document.querySelector('#content');
+const site=document.body.dataset.site,base='https://console.richrowrecords.com',content=document.querySelector('#content');
 document.querySelector('#year').textContent=new Date().getFullYear();
 const node=(tag,text,cls)=>{const n=document.createElement(tag);if(text)n.textContent=text;if(cls)n.className=cls;return n;};
 const safe=value=>{try{const u=new URL(value);return u.protocol==='https:'&&!u.username&&!u.password?u.href:null;}catch{return null;}};
@@ -17,7 +17,7 @@ async function load(){try{const r=await fetch(base+'/api/addon/page?slug='+encod
  for(const [i,b] of p.blocks.filter(b=>!b.hidden).entries()){if(i===0&&b.type==='heading'){const h=document.querySelector('h1'),title=b.title||p.title;const lines=title==='DracoDon17'?['Draco','Don17.']:title==='Wayne Kastro'?['Wayne','Kastro.']:null;if(lines)h.replaceChildren(...lines.map(t=>node('span',t)));else{h.textContent=title;h.style.fontSize='clamp(48px,8vw,120px)';}document.querySelector('#intro').textContent=b.body||'';continue;}
  if(b.type==='heading'){section=node('section');section.id=(b.title||'section-'+number).toLowerCase().replace(/[^a-z0-9]+/g,'-').replace(/^-|-$/g,'');const head=node('div',null,'section-head');head.append(node('small',String(++number).padStart(2,'0')),node('h2',b.title));section.append(head);if(b.body)section.append(node('p',b.body));fragment.append(section);}else{if(!section){section=node('section');fragment.append(section);}section.append(block(b));}}
  content.replaceChildren(fragment);await loadCatalog();
- }catch{content.replaceChildren(node('p','Updates are temporarily unavailable. Please check back soon.','notice'),link(location.origin+'/addons/page?slug='+site,'Open artist updates'),link('https://richrowmusic.com/contact.html','Booking & enquiries'));}}
+ }catch{content.replaceChildren(node('p','Updates are temporarily unavailable. Please check back soon.','notice'),link(location.origin+'/addons/page?slug='+site,'Open artist updates'),link('https://richrowrecords.com/contact.html','Booking & enquiries'));}}
 
 
 // Public catalog access; database policies allow published records only.

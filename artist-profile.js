@@ -1,6 +1,6 @@
 const year=document.querySelector('#year');if(year)year.textContent=new Date().getFullYear();
 const artists={waynekastro:{name:'Wayne Kastro',url:'https://waynekastro.com'},dracodon17:{name:'Draco Don17',url:'https://dracodon17.com'},goldenrama440:{name:'Golden Rama',url:'https://goldenrama440.com'}};
-const base='https://console.richrowmusic.com';
+const base='https://console.richrowrecords.com';
 const node=(tag,text='',cls='')=>{const n=document.createElement(tag);n.textContent=text;if(cls)n.className=cls;return n;};
 const safe=value=>{try{const u=new URL(value);return u.protocol==='https:'&&!u.username&&!u.password?u.href:null;}catch{return null;}};
 const anchor=(text,url)=>{const a=node('a',text);a.href=url;return a;};
