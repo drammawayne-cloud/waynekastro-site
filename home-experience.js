@@ -5,58 +5,7 @@
  if(!main||!content)return;
  const el=(tag,text,cls)=>{const n=document.createElement(tag);if(text)n.textContent=text;if(cls)n.className=cls;return n;};
  const link=(text,href,cls='action')=>{const n=el('a',text,cls);n.href=href;return n;};
- const photos=[
-  ['04-fedora','After Hours','Black fedora · Charcoal studio'],
-  ['05-bucket','City Rhythm','Cream bucket hat · City courtyard'],
-  ['10-panama','Island State','Straw Panama · Caribbean terrace'],
-  ['06-beanie','Cold City','Charcoal beanie · Evening streets'],
-  ['07-newsboy','Sunday Soul','Tweed newsboy cap · Vinyl lounge'],
-  ['08-snapback','The Home Team','Burgundy snapback · Ivory studio'],
-  ['09-porkpie','Blue Note','Navy pork pie · Recording room'],
-  ['11-trucker','Off the Clock','Black trucker cap · Studio hallway'],
-  ['12-beret','Creative Direction','Black beret · Artist loft'],
-  ['02-ivory-portrait','In the Light','Black cap · Warm ivory set'],
-  ['03-studio-session','Behind the Sound','Black cap · Recording studio'],
-  ['01-studio-hero','Signature','Black cap · Gold studio lights']
- ];
- let dialog,current=0,returnFocus;
- function showPhoto(index){
-  current=(index+photos.length)%photos.length;const [file,title,look]=photos[current];
-  dialog.querySelector('img').src=`assets/portraits/${file}.jpg`;
-  dialog.querySelector('img').alt=`Wayne Kastro — ${title}. ${look}.`;
-  dialog.querySelector('#photo-title').textContent=title;
-  dialog.querySelector('.photo-description').textContent=`${current+1} / ${photos.length} · ${look}`;
-  const download=dialog.querySelector('a');download.href=`assets/portraits/${file}.jpg`;download.download=`wayne-kastro-${file}.jpg`;
- }
- function openPhoto(index,trigger){
-  if(!dialog){
-   dialog=el('dialog',null,'photo-dialog');dialog.setAttribute('aria-labelledby','photo-title');
-   const top=el('div',null,'photo-dialog-top'),title=el('strong');title.id='photo-title';
-   const close=el('button','×');close.type='button';close.setAttribute('aria-label','Close photo');close.onclick=()=>dialog.close();
-   top.append(title,close);const image=el('img');image.decoding='async';
-   const bottom=el('div',null,'photo-dialog-bottom'),desc=el('span',null,'photo-description');desc.setAttribute('aria-live','polite');
-   const download=link('Download ↗','#','photo-download');
-   const controls=el('div'),previous=el('button','←'),next=el('button','→');
-   for(const [button,name,delta] of [[previous,'Previous photo',-1],[next,'Next photo',1]]){button.type='button';button.setAttribute('aria-label',name);button.onclick=()=>showPhoto(current+delta);}
-   controls.append(previous,next);bottom.append(desc,download,controls);dialog.append(top,image,bottom);document.body.append(dialog);
-   dialog.addEventListener('keydown',e=>{if(e.key==='ArrowRight'||e.key==='ArrowLeft'){e.preventDefault();showPhoto(current+(e.key==='ArrowRight'?1:-1));}});
-   dialog.addEventListener('click',e=>{if(e.target===dialog){const r=dialog.getBoundingClientRect();if(e.clientX<r.left||e.clientX>r.right||e.clientY<r.top||e.clientY>r.bottom)dialog.close();}});
-   dialog.addEventListener('close',()=>{document.body.style.overflow='';returnFocus?.focus({preventScroll:true});});
-  }
-  returnFocus=trigger;showPhoto(index);document.body.style.overflow='hidden';dialog.showModal();
- }
- function enhanceAlbum(){
-  let target=document.getElementById('photos');
-  if(!target&&content.querySelector('.notice')?.textContent.startsWith('Updates are temporarily unavailable')){target=el('section');target.id='photos';const head=el('div',null,'section-head');head.append(el('h2','Photos'));target.append(head);content.append(target);}
-  if(!target||target.dataset.album)return;target.dataset.album='ready';
-  for(const b of target.querySelectorAll('.block'))if(b.textContent.trim()==='Photos from the studio and stage will appear here.')b.remove();
-  const intro=el('p','Different looks. Different settings. Always WAYNE KASTRO.','album-intro');
-  const grid=el('div',null,'album-grid');grid.id='portrait-album';
-  photos.forEach(([file,title,look],index)=>{const figure=el('figure',null,'album-item');figure.hidden=index>=6;const button=el('button',null,'album-open');button.type='button';button.setAttribute('aria-label',`Open photo: ${title}`);const image=el('img');image.src=`assets/portraits/${file}.jpg`;image.alt=`Wayne Kastro — ${look}`;image.width=1122;image.height=1402;image.loading='lazy';image.decoding='async';button.append(image);button.onclick=()=>openPhoto(index,button);const caption=el('figcaption',title);caption.append(el('small',look));figure.append(button,caption);grid.append(figure);});
-  const more=el('button','View all 12 photos','album-more');more.type='button';more.setAttribute('aria-expanded','false');more.setAttribute('aria-controls',grid.id);
-  more.onclick=()=>{const expanded=more.getAttribute('aria-expanded')!=='true';[...grid.children].forEach((item,i)=>item.hidden=!expanded&&i>=6);more.setAttribute('aria-expanded',String(expanded));more.textContent=expanded?'Show featured photos':'View all 12 photos';};
-  target.append(intro,grid,more);
- }
+ function enhanceAlbum(){let target=document.getElementById('photos');if(!target&&content.querySelector('.notice')?.textContent.startsWith('Updates are temporarily unavailable')){target=el('section');target.id='photos';content.append(target);}if(!target||target.dataset.album)return;target.dataset.album='ready';target.replaceChildren(el('p','MEMBERSHIP / GALLERY','eyebrow'),el('h2','Inside the collection.'),el('p','One $15/month membership includes this artist’s gallery and live broadcasts. Higher tiers include these benefits too.','album-intro'),link('Open the gallery ↗','/gallery.html','album-more'));}
  function enhanceCatalog(){
   const grid=document.querySelector('#music .catalog-grid');if(!grid||grid.dataset.browse)return;grid.dataset.browse='ready';grid.id='music-catalog';
   const cards=[...grid.querySelectorAll('.catalog-card')];if(!cards.length)return;
