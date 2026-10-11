@@ -11,7 +11,7 @@ function block(b){const box=node('div',null,'block');applyLayout(box,b);if(b.tit
  if(['audio','video','youtube','vimeo'].includes(b.type)){box.append(link(location.origin+'/membership.html?site='+encodeURIComponent(site),'Sign in / Join for member media'));return box;}
  if(['youtube','vimeo'].includes(b.type)&&safe(b.url)&&['www.youtube-nocookie.com','player.vimeo.com'].includes(new URL(b.url).hostname)){const frame=node('iframe');frame.src=b.url;frame.title=b.title||'Official video';frame.loading='lazy';frame.allow='fullscreen; picture-in-picture';frame.allowFullscreen=true;frame.referrerPolicy='strict-origin-when-cross-origin';box.append(frame);}
  if(b.type==='release')box.append(node('p',b.artist),link(location.origin+'/addons/store?product='+encodeURIComponent(b.productId),b.label||'View release'));
- if(b.type==='radio')box.append(link(location.origin+'/addons/radio',b.label||'Listen to Highlife Radio'));
+ if(b.type==='radio')box.append(link(location.origin+'/addons/radio',b.label||'Listen to Wayne Kastro Radio'));
  if(b.type==='divider')box.append(node('hr'));if(b.type==='spacer')box.style.height=Math.min(160,Math.max(8,Number(b.height)||8))+'px';return box;}
 async function renderPage(p){const fragment=document.createDocumentFragment();let section,number=0;
  for(const [i,b] of visibleBlocks(p.blocks).entries()){if(i===0&&b.type==='heading'){const hero=document.querySelector('.hero');if(hero)applyLayout(hero,b);const h=document.querySelector('h1'),title=b.title||p.title;const lines=title==='DracoDon17'?['Draco','Don17.']:title==='Wayne Kastro'?['Wayne','Kastro.']:null;if(lines)h.replaceChildren(...lines.map(t=>node('span',t)));else{h.textContent=title;h.style.fontSize='clamp(48px,8vw,120px)';}document.querySelector('#intro').textContent=b.body||'';continue;}
@@ -35,7 +35,7 @@ async function loadCatalog(){try{const query=new URLSearchParams({website_id:'eq
 
 load();
 
-import('./radio-player.js?v=20261011-wayne-station').then(({mountSpeakerRadio})=>{const root=document.createElement('section');document.querySelector('.hero').after(root);mountSpeakerRadio(root);}).catch(()=>{});
+import('./radio-player.js?v=20261011-wayne-art').then(({mountSpeakerRadio})=>{const root=document.createElement('section');document.querySelector('.hero').after(root);mountSpeakerRadio(root);}).catch(()=>{});
 
 function applyLayout(box,b){box.dataset.studioBlock=b.id;box.dataset.studioCustomized=String(b.customized===true);box.classList.add('rr-layout');box.style.textAlign=['left','center','right'].includes(b.align)?b.align:'';box.style.marginLeft=b.align&&b.align!=='left'?'auto':'';box.style.marginRight=b.align&&b.align!=='right'?'auto':'';box.style.maxWidth=b.width==='half'?'50%':b.width==='third'?'33.333%':'';}
 
