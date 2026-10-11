@@ -32,8 +32,8 @@
   content.after(section);
  }
  function moveRadio(){
-  const radio=main.querySelector(':scope > section[aria-label="Highlife Radio live player"]');if(!radio)return;
-  let lounge=document.getElementById('radio-lounge');if(!lounge){lounge=el('section',null,'radio-lounge');lounge.id='radio-lounge';lounge.append(el('p','ON AIR / HIGHLIFE RADIO','eyebrow'),el('h2','Keep the music playing.'));main.append(lounge);}lounge.append(radio);
+  const radio=main.querySelector(':scope > section[aria-label="Wayne Kastro Radio live player"]');if(!radio)return;
+  let lounge=document.getElementById('radio-lounge');if(!lounge){lounge=el('section',null,'radio-lounge');lounge.id='radio-lounge';lounge.append(el('p','ON AIR / WAYNE KASTRO RADIO','eyebrow'),el('h2','Keep the music playing.'));main.append(lounge);}lounge.append(radio);
  }
  function enhance(){enhanceAlbum();enhanceCatalog();enhanceAbout();enhanceConnect();moveRadio();}
  addInvites();enhance();let queued=false;
