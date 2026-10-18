@@ -35,7 +35,7 @@ async function loadCatalog(){try{const query=new URLSearchParams({website_id:'eq
 
 load();
 
-import('./radio-player.js?v=20261017-wayne-preview').then(({mountSpeakerRadio})=>{const root=document.createElement('section');document.querySelector('.hero').after(root);mountSpeakerRadio(root);}).catch(()=>{});
+import('./radio-player.js?v=20261018-modebar').then(({mountSpeakerRadio})=>{const root=document.createElement('section');document.querySelector('.hero').after(root);mountSpeakerRadio(root);}).catch(()=>{});
 
 function applyLayout(box,b){box.dataset.studioBlock=b.id;box.dataset.studioCustomized=String(b.customized===true);box.classList.add('rr-layout');box.style.textAlign=['left','center','right'].includes(b.align)?b.align:'';box.style.marginLeft=b.align&&b.align!=='left'?'auto':'';box.style.marginRight=b.align&&b.align!=='right'?'auto':'';box.style.maxWidth=b.width==='half'?'50%':b.width==='third'?'33.333%':'';}
 
