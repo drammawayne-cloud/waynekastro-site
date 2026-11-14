@@ -1,0 +1,7 @@
+User-agent: *
+Allow: /
+Disallow: /addons/
+Disallow: /portal.html
+Disallow: /account.html
+Disallow: /payouts.html
+Sitemap: https://waynekastro.com/sitemap.xml
